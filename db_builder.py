@@ -2,6 +2,10 @@
 import json
 import sqlite3
 
+# read in the JSON data from the local file
+with open("files/quotes.json") as jsonfile:
+    jsondata= json.load(jsonfile)
+
 def db_builder(jsondata):
     # Establish a connection to the SQLite database
     conn = sqlite3.connect('files/harry_potter.db')
@@ -29,3 +33,6 @@ def db_builder(jsondata):
 
     # Close the connection
     conn.close()
+
+if __name__ == "__main__":
+    db_builder(jsondata)
