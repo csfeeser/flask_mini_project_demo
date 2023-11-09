@@ -6,10 +6,11 @@ import json
 import uuid
 import random
 from pprint import pprint
-from flask import Flask, render_template, request, redirect, abort, make_response
+from flask import Flask, render_template, request, redirect, abort, make_response, session
 from db_builder import *
 
 app= Flask(__name__)
+app.secret_key = "YER A HARRY, WIZARD!"
 
 def db_reader():
     '''this is a 'helper' function; the database is read in many places
@@ -76,6 +77,7 @@ def randomquote():
 def addquote():
     try:
         quoteid = str(uuid.uuid4())
+        passwd  = request.form.get('password')
         quote   = request.form.get('quote')    
         speaker = request.form.get('speaker')
         story   = request.form.get('story')    
